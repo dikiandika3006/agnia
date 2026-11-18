@@ -248,12 +248,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'linkedin'       => trim((string)($_POST['linkedin'] ?? '')),
                 'location'       => trim((string)($_POST['location'] ?? '')),
                 'form_recipient' => trim((string)($_POST['form_recipient'] ?? '')),
+                'ga_id'          => strtoupper(trim((string)($_POST['ga_id'] ?? ''))),
             ];
             if ($in['site_url'] !== '' && !valid_url($in['site_url']))                          $errors[] = 'Alamat website harus diawali https:// atau http://';
             if ($in['whatsapp'] !== '' && !preg_match('/^62\d{8,13}$/', $in['whatsapp']))        $errors[] = 'Nomor WhatsApp belum valid (contoh: 0812xxxxxxx).';
             if ($in['email'] !== '' && !filter_var($in['email'], FILTER_VALIDATE_EMAIL))        $errors[] = 'Email belum valid.';
             if ($in['form_recipient'] !== '' && !filter_var($in['form_recipient'], FILTER_VALIDATE_EMAIL)) $errors[] = 'Email penerima pesan belum valid.';
             if ($in['linkedin'] !== '' && !valid_url($in['linkedin']))                          $errors[] = 'Link LinkedIn harus diawali https://';
+            if ($in['ga_id'] !== '' && !preg_match('/^G-[A-Z0-9]{4,15}$/', $in['ga_id']))      $errors[] = 'ID Google Analytics belum valid (contoh: G-ABC123XYZ).';
             if (mb_strlen($in['location']) > 100)                                                $errors[] = 'Lokasi terlalu panjang.';
             if ($errors) {
                 $_SESSION['old']  = $in;
@@ -432,6 +434,7 @@ unset($_SESSION['old']);
       <div class="grid2">
         <label class="f"><span>Alamat website (domain)</span><input type="url" name="site_url" value="<?= e($s['site_url']) ?>" placeholder="https://agnia.co.id"><small>Dipakai untuk SEO & pratinjau link.</small></label>
         <label class="f"><span>Email penerima pesan form</span><input type="email" name="form_recipient" value="<?= e($s['form_recipient']) ?>" placeholder="Kosong = pakai email di atas"><small>Butuh fitur kirim email aktif di hosting.</small></label>
+        <label class="f"><span>ID Google Analytics</span><input type="text" name="ga_id" value="<?= e($s['ga_id']) ?>" placeholder="G-XXXXXXXXXX"><small>Kosong = tidak ada pelacakan pengunjung.</small></label>
       </div>
       <div class="actions"><button class="btn p" type="submit">Simpan pengaturan</button></div>
     </form>

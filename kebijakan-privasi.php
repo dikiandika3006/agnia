@@ -32,7 +32,7 @@ require __DIR__ . '/includes/sections.php';
     <p>Data yang Anda serahkan dalam proyek tetap milik Anda. Data tersebut hanya dipakai untuk menjalankan proyek sesuai perjanjian kerja, dan tidak dipakai untuk melatih model AI pihak ketiga tanpa persetujuan tertulis.</p>
 
     <h2>6. Pihak ketiga</h2>
-    <p>Situs ini memuat font dari Google Fonts. Jika Anda menghubungi kami lewat WhatsApp atau email, kebijakan privasi penyedia layanan tersebut juga berlaku.</p>
+    <p>Situs ini memuat font dari Google Fonts.<?php if (GA_ID !== ''): ?> Kami memakai Google Analytics untuk memahami cara pengunjung memakai situs, misalnya halaman yang dibuka, jenis perangkat, dan perkiraan lokasi. Google Analytics memakai cookie dan tidak kami pakai untuk mengenali Anda secara pribadi. Anda dapat menolaknya lewat pengaturan cookie browser atau <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">add-on penonaktifan Google Analytics</a>.<?php endif; ?> Jika Anda menghubungi kami lewat WhatsApp atau email, kebijakan privasi penyedia layanan tersebut juga berlaku.</p>
 
     <h2>7. Hak Anda</h2>
     <p>Anda berhak meminta akses, perbaikan, atau penghapusan data pribadi Anda, serta menarik persetujuan kapan saja. Ajukan permintaan melalui <a href="kontak#form">halaman kontak</a><?= CONTACT_EMAIL !== '' ? ' atau email <a href="mailto:' . e(CONTACT_EMAIL) . '">' . e(CONTACT_EMAIL) . '</a>' : '' ?>.</p>

@@ -36,6 +36,10 @@ $base_href  = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/
 <link rel="stylesheet" href="css/agnia-tokens.css">
 <link rel="stylesheet" href="css/style.css?v=1">
 <script src="js/main.js?v=1" defer></script>
+<?php if (GA_ID !== ''): ?>
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?= GA_ID ?>"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','<?= GA_ID ?>');</script>
+<?php endif; ?>
 </head>
 <body class="page-<?= e($page_key ?: 'home') ?>">
 <a class="skip" href="<?= e($page_path) ?>#main">Lewati ke konten</a>
