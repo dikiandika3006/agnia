@@ -19,7 +19,7 @@ const SETTINGS_DEFAULT = [
     'linkedin'       => '',             // contoh: https://www.linkedin.com/company/agnia
     'location'       => 'Indonesia',
     'form_recipient' => '',             // kosong = pakai email di atas
-    'ga_id'          => '',             // Google Analytics 4, contoh: G-ABC123XYZ
+    'ga_id'          => '',             // Google tag: G-XXXX atau GTM-XXXX
 ];
 
 function settings(): array
@@ -38,7 +38,7 @@ define('CONTACT_WHATSAPP', settings()['whatsapp']);
 define('CONTACT_EMAIL', settings()['email']);
 define('CONTACT_LINKEDIN', settings()['linkedin']);
 define('CONTACT_LOCATION', settings()['location'] !== '' ? settings()['location'] : 'Indonesia');
-define('GA_ID', preg_match('/^G-[A-Z0-9]{4,15}$/', settings()['ga_id']) ? settings()['ga_id'] : '');
+define('GA_ID', preg_match('/^(G|GTM|GT)-[A-Z0-9]{4,15}$/', settings()['ga_id']) ? settings()['ga_id'] : '');
 define('FORM_RECIPIENT', settings()['form_recipient'] !== '' ? settings()['form_recipient'] : CONTACT_EMAIL);
 
 /** Screenshot Sistem Manajemen Toko (diunggah lewat admin), atau '' jika belum ada. */

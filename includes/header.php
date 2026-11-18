@@ -37,8 +37,13 @@ $base_href  = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/
 <link rel="stylesheet" href="css/style.css?v=1">
 <script src="js/main.js?v=1" defer></script>
 <?php if (GA_ID !== ''): ?>
+<?php if (str_starts_with(GA_ID, 'GTM-')): ?>
+<script async src="https://www.googletagmanager.com/gtm.js?id=<?= GA_ID ?>"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());</script>
+<?php else: ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?= GA_ID ?>"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','<?= GA_ID ?>');</script>
+<?php endif; ?>
 <?php endif; ?>
 </head>
 <body class="page-<?= e($page_key ?: 'home') ?>">
