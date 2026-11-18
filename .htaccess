@@ -1,0 +1,35 @@
+Options -Indexes
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Blokir akses langsung ke folder internal
+  RewriteRule ^(includes|storage)(/|$) - [F,L]
+
+  # /layanan.php -> /layanan (URL bersih)
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?([^/\s?]+)\.php[\s?] [NC]
+  RewriteCond %2 !^index$
+  RewriteRule ^ %1%2 [R=301,L,NE]
+
+  # /layanan -> layanan.php
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^(.+?)/?$ $1.php [L]
+</IfModule>
+
+ErrorDocument 404 /404.php
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+</IfModule>

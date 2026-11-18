@@ -1,0 +1,97 @@
+/* AGNIA design tokens — v1.0 (November 2026)
+   Pakai file ini sebagai dasar CSS website AGNIA.
+   Font: Inter (Google Fonts). */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Warna utama */
+  --agnia-navy: #0B1A30;
+  --agnia-blue: #0052FF;
+
+  /* Warna pendukung */
+  --agnia-blue-bright: #4D8DFF; /* biru di atas latar navy */
+  --agnia-blue-deep: #0040CC;   /* hover / pressed */
+  --agnia-blue-tint: #E8F0FF;   /* latar aksen lembut */
+  --agnia-gray-50: #F4F6FA;     /* latar section */
+  --agnia-gray-600: #5A6478;    /* teks sekunder */
+  --agnia-line: #DDE3EC;        /* garis & border */
+  --agnia-white: #FFFFFF;
+  --agnia-navy-surface: #132540;/* kartu di latar navy */
+  --agnia-text-on-dark: #A7B3C7;/* teks sekunder di latar navy */
+
+  /* Tipografi */
+  --agnia-font: 'Inter', 'Segoe UI', Arial, sans-serif;
+  --agnia-text-display: 700 56px/64px var(--agnia-font);
+  --agnia-text-h1: 700 40px/48px var(--agnia-font);
+  --agnia-text-h2: 600 32px/40px var(--agnia-font);
+  --agnia-text-h3: 600 24px/32px var(--agnia-font);
+  --agnia-text-body-lg: 400 18px/28px var(--agnia-font);
+  --agnia-text-body: 400 16px/26px var(--agnia-font);
+  --agnia-text-small: 400 14px/22px var(--agnia-font);
+  --agnia-text-label: 600 12px/16px var(--agnia-font);
+
+  /* Jarak (kelipatan 4/8) */
+  --agnia-space-1: 4px;
+  --agnia-space-2: 8px;
+  --agnia-space-3: 12px;
+  --agnia-space-4: 16px;
+  --agnia-space-5: 24px;
+  --agnia-space-6: 32px;
+  --agnia-space-7: 48px;
+  --agnia-space-8: 64px;
+  --agnia-space-9: 96px;
+
+  /* Sudut */
+  --agnia-radius-sm: 8px;   /* tombol, input */
+  --agnia-radius-md: 12px;  /* kartu */
+  --agnia-radius-lg: 20px;  /* blok besar, gambar */
+
+  /* Layout */
+  --agnia-container: 1200px;
+  --agnia-gutter: 24px;
+}
+
+body {
+  margin: 0;
+  font: var(--agnia-text-body);
+  color: var(--agnia-navy);
+  background: var(--agnia-white);
+}
+
+h1, h2, h3 { letter-spacing: -0.01em; }
+
+.agnia-label {
+  font: var(--agnia-text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--agnia-blue);
+}
+
+.agnia-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 20px;
+  border-radius: var(--agnia-radius-sm);
+  font: 600 16px/24px var(--agnia-font);
+  text-decoration: none; cursor: pointer;
+  border: 1.5px solid transparent;
+}
+.agnia-btn--primary { background: var(--agnia-blue); color: var(--agnia-white); }
+.agnia-btn--primary:hover { background: var(--agnia-blue-deep); }
+.agnia-btn--secondary { background: transparent; color: var(--agnia-navy); border-color: var(--agnia-navy); }
+.agnia-btn--secondary:hover { background: var(--agnia-gray-50); }
+.agnia-btn--on-dark { background: var(--agnia-white); color: var(--agnia-navy); }
+
+:focus-visible { outline: 2px solid var(--agnia-blue-bright); outline-offset: 2px; }
+
+.agnia-card {
+  background: var(--agnia-white);
+  border: 1px solid var(--agnia-line);
+  border-radius: var(--agnia-radius-md);
+  padding: var(--agnia-space-5);
+}
+
+.agnia-section--dark { background: var(--agnia-navy); color: var(--agnia-white); }
+.agnia-section--dark .agnia-card { background: var(--agnia-navy-surface); border-color: transparent; }
+.agnia-section--dark .agnia-label { color: var(--agnia-blue-bright); }
+.agnia-section--dark p { color: var(--agnia-text-on-dark); }

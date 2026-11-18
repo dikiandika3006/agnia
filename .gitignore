@@ -1,0 +1,9 @@
+# Data runtime (password admin, pengaturan, pesan masuk) — jangan di-commit
+storage/*
+!storage/.htaccess
+
+# Screenshot yang diunggah lewat admin
+assets/images/sistem-toko.*
+
+.DS_Store
+Thumbs.db
