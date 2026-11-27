@@ -33,10 +33,41 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Slider "Karya Kami": geser/swipe, panah, titik, dan putar otomatis
+  document.querySelectorAll('[data-slider]').forEach(function (root) {
+    var track = root.querySelector('.show-track');
+    var dots = root.querySelectorAll('.show-dots button');
+    var n = dots.length, cur = 0, timer = null;
+
+    function go(i) {
+      cur = (i + n) % n;
+      track.scrollTo({ left: cur * track.clientWidth, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    function mark() {
+      cur = Math.round(track.scrollLeft / track.clientWidth);
+      dots.forEach(function (d, j) {
+        if (j === cur) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current');
+      });
+    }
+    function stop() { clearInterval(timer); timer = null; }
+    function play() { if (!reduceMotion && !timer) timer = setInterval(function () { go(cur + 1); }, 6000); }
+
+    root.querySelector('.prev').addEventListener('click', function () { go(cur - 1); });
+    root.querySelector('.next').addEventListener('click', function () { go(cur + 1); });
+    dots.forEach(function (d, j) { d.addEventListener('click', function () { go(j); }); });
+    track.addEventListener('scroll', function () { window.requestAnimationFrame(mark); }, { passive: true });
+    window.addEventListener('resize', function () { track.scrollLeft = cur * track.clientWidth; });
+    ['mouseenter', 'focusin', 'touchstart'].forEach(function (ev) { root.addEventListener(ev, stop, { passive: true }); });
+    root.addEventListener('mouseleave', play);
+    play();
+  });
+
   // Animasi masuk saat elemen terlihat
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if ('IntersectionObserver' in window && !reduceMotion) {
     var targets = document.querySelectorAll(
-      '.sc, .qbar, .svc-card, .type, .show, .fs, .dash, .pc, .gate, .bacol, .wc, .cta, .role, .mvc, .sol, .sd, .form-card, .info'
+      '.sc, .qbar, .svc-card, .type, .showcase, .fs, .dash, .pc, .gate, .bacol, .wc, .cta, .role, .mvc, .sol, .sd, .form-card, .info'
     );
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {

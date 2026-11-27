@@ -41,13 +41,14 @@ define('CONTACT_LOCATION', settings()['location'] !== '' ? settings()['location'
 define('GA_ID', preg_match('/^(G|GTM|GT)-[A-Z0-9]{4,15}$/', settings()['ga_id']) ? settings()['ga_id'] : '');
 define('FORM_RECIPIENT', settings()['form_recipient'] !== '' ? settings()['form_recipient'] : CONTACT_EMAIL);
 
-/** Screenshot Sistem Manajemen Toko (diunggah lewat admin), atau '' jika belum ada. */
-function showcase_image(): string
+/** Screenshot aplikasi (assets/images/{slug}.png|jpg|webp), atau '' jika belum ada.
+    Default: Sistem Manajemen Toko (diunggah lewat admin). */
+function showcase_image(string $slug = 'sistem-toko'): string
 {
     foreach (['png', 'jpg', 'webp'] as $ext) {
-        $f = __DIR__ . '/../assets/images/sistem-toko.' . $ext;
+        $f = __DIR__ . '/../assets/images/' . $slug . '.' . $ext;
         if (is_file($f)) {
-            return 'assets/images/sistem-toko.' . $ext . '?v=' . filemtime($f);
+            return 'assets/images/' . $slug . '.' . $ext . '?v=' . filemtime($f);
         }
     }
     return '';

@@ -108,25 +108,25 @@ function section_apps(): void
 </section>
 <?php }
 
-function section_showcase(string $id = ''): void
+/* Slide "Karya Kami": [slug gambar, nama, deskripsi, poin].
+   Gambar opsional: assets/images/{slug}.png|jpg|webp (1040 × 660). */
+const WORKS = [
+    ['sistem-toko', '<em>Sistem</em> Manajemen Toko', 'Aplikasi yang kami bangun dan jual sendiri, menggabungkan pemrograman, keuangan, dan AI untuk membantu pemilik toko mengelola usahanya.',
+        ['Penjualan, stok, dan kas dalam satu sistem', 'Dipakai langsung oleh pemilik toko']],
+    ['koperasi-ksm', '<em>Sistem</em> Koperasi KSM', 'Pengelolaan anggota, simpanan, pinjaman, dan angsuran koperasi yang rapi dan transparan.',
+        ['Simpanan &amp; pinjaman anggota', 'Laporan koperasi otomatis']],
+    ['dental-care', '<em>Klinik</em> Dental Care', 'Sistem klinik gigi untuk pendaftaran pasien, rekam medis, jadwal dokter, dan pembayaran.',
+        ['Rekam medis &amp; jadwal dokter', 'Kasir dan laporan klinik']],
+    ['keuangan-app', '<em>Program</em> Keuangan Android &amp; Web', 'Pencatatan dan laporan keuangan yang bisa diakses dari ponsel Android maupun browser.',
+        ['Tersedia di Android &amp; web', 'Laporan keuangan real-time']],
+    ['administrasi-instansi', '<em>Program</em> Administrasi Instansi', 'Digitalisasi administrasi instansi: surat-menyurat, arsip, dan pelaporan dalam satu aplikasi.',
+        ['Surat &amp; arsip digital', 'Akses sesuai peran pengguna']],
+];
+
+function showcase_mock(int $i): void
 {
-    $shot = showcase_image();
+    $sets = [[40, 65, 50, 80, 60, 90, 72], [70, 55, 85, 45, 75, 60, 95], [50, 80, 65, 90, 55, 70, 85], [85, 60, 75, 50, 95, 65, 70], [60, 45, 70, 85, 50, 80, 65]];
     ?>
-<div class="show"<?= $id ? ' id="' . $id . '"' : '' ?>>
-  <div class="show-txt">
-    <span class="tag">KARYA KAMI</span>
-    <h3>Aplikasi yang <em>sudah kami bangun</em></h3>
-    <p>Dibangun dan dirawat oleh tim AGNIA, dipakai langsung oleh klien di berbagai bidang.</p>
-    <ol class="works">
-      <?php foreach (['Sistem Manajemen Toko', 'Sistem Koperasi KSM', 'Klinik Dental Care', 'Program Keuangan Android &amp; Web', 'Program Administrasi Instansi'] as $i => $w): ?>
-      <li><span class="num"><?= $i + 1 ?></span><?= $w ?></li>
-      <?php endforeach; ?>
-    </ol>
-    <a class="btn w" href="kontak?topik=aplikasi#form">Diskusikan aplikasi Anda <?= arrow() ?></a>
-  </div>
-  <?php if ($shot): ?>
-  <img class="slot-img" src="<?= e($shot) ?>" alt="Tampilan aplikasi buatan AGNIA" width="1040" height="660" loading="lazy">
-  <?php else: ?>
   <div class="slot" aria-hidden="true">
     <div class="mock">
       <div class="mock-bar"><i></i><i></i><i></i></div>
@@ -134,12 +134,43 @@ function section_showcase(string $id = ''): void
         <div class="mock-side"><span></span><span></span><span></span><span></span></div>
         <div class="mock-main">
           <div class="mock-kpis"><span></span><span></span><span></span></div>
-          <div class="mock-chart"><?php foreach ([40, 65, 50, 80, 60, 90, 72] as $h): ?><i style="height:<?= $h ?>%"></i><?php endforeach; ?></div>
+          <div class="mock-chart"><?php foreach ($sets[$i % 5] as $h): ?><i style="height:<?= $h ?>%"></i><?php endforeach; ?></div>
         </div>
       </div>
     </div>
   </div>
-  <?php endif; ?>
+<?php }
+
+function section_showcase(string $id = ''): void
+{
+    $n = count(WORKS);
+    ?>
+<div class="showcase" data-slider<?= $id ? ' id="' . $id . '"' : '' ?> role="region" aria-roledescription="carousel" aria-label="Karya kami">
+  <div class="show-track">
+    <?php foreach (WORKS as $i => [$slug, $name, $desc, $points]): $shot = showcase_image($slug); ?>
+    <div class="show" role="group" aria-roledescription="slide" aria-label="<?= $i + 1 ?> dari <?= $n ?>">
+      <div class="show-txt">
+        <span class="tag">KARYA KAMI · <?= $i + 1 ?>/<?= $n ?></span>
+        <h3><?= $name ?></h3>
+        <p><?= $desc ?></p>
+        <ul>
+          <?php foreach ($points as $pt): ?><li><?= icon('check', 18, 2.4) ?><?= $pt ?></li><?php endforeach; ?>
+        </ul>
+        <a class="btn w" href="kontak?topik=aplikasi#form">Diskusikan aplikasi Anda <?= arrow() ?></a>
+      </div>
+      <?php if ($shot): ?>
+      <img class="slot-img" src="<?= e($shot) ?>" alt="Tampilan <?= strip_tags($name) ?>" width="1040" height="660" loading="lazy">
+      <?php else: showcase_mock($i); endif; ?>
+    </div>
+    <?php endforeach; ?>
+  </div>
+  <div class="show-nav">
+    <button type="button" class="show-btn prev" aria-label="Sebelumnya"><?= arrow() ?></button>
+    <div class="show-dots">
+      <?php for ($i = 0; $i < $n; $i++): ?><button type="button" aria-label="Slide <?= $i + 1 ?>"<?= $i ? '' : ' aria-current="true"' ?>></button><?php endfor; ?>
+    </div>
+    <button type="button" class="show-btn next" aria-label="Berikutnya"><?= arrow() ?></button>
+  </div>
 </div>
 <?php }
 

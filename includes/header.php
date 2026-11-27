@@ -34,8 +34,8 @@ $base_href  = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="css/agnia-tokens.css">
-<link rel="stylesheet" href="css/style.css?v=1">
-<script src="js/main.js?v=1" defer></script>
+<link rel="stylesheet" href="css/style.css?v=2">
+<script src="js/main.js?v=2" defer></script>
 <?php if (GA_ID !== ''): ?>
 <?php if (str_starts_with(GA_ID, 'GTM-')): ?>
 <script async src="https://www.googletagmanager.com/gtm.js?id=<?= GA_ID ?>"></script>
