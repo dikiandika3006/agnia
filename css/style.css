@@ -164,6 +164,9 @@ a.card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(11,26,48,.1)
 .show ul{margin:24px 0 28px;display:flex;flex-direction:column;gap:10px}
 .show li{display:flex;gap:10px;align-items:center;font-size:15px}
 .show li .ic{color:var(--agnia-blue-bright)}
+.show .works{gap:12px}
+.show .works li{font-size:16px;font-weight:600}
+.show .works .num{width:28px;height:28px;font-size:13px}
 .slot,.slot-img{width:520px;max-width:100%;aspect-ratio:1040/660;flex:none;border-radius:16px}
 .slot-img{object-fit:cover}
 .slot{background:var(--agnia-navy-surface);border:1px solid rgba(77,141,255,.3);padding:18px;display:flex}

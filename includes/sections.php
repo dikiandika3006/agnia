@@ -115,16 +115,17 @@ function section_showcase(string $id = ''): void
 <div class="show"<?= $id ? ' id="' . $id . '"' : '' ?>>
   <div class="show-txt">
     <span class="tag">KARYA KAMI</span>
-    <h3><em>Sistem</em> Manajemen Toko</h3>
-    <p>Aplikasi yang kami bangun dan jual sendiri, menggabungkan pemrograman, keuangan, dan AI untuk membantu pemilik toko mengelola usahanya.</p>
-    <ul>
-      <li><?= icon('check', 18, 2.4) ?>Dipakai langsung oleh pemilik toko</li>
-      <li><?= icon('check', 18, 2.4) ?>Dibangun dan dirawat oleh tim AGNIA</li>
-    </ul>
-    <a class="btn w" href="kontak?topik=toko#form">Pelajari lebih lanjut <?= arrow() ?></a>
+    <h3>Aplikasi yang <em>sudah kami bangun</em></h3>
+    <p>Dibangun dan dirawat oleh tim AGNIA, dipakai langsung oleh klien di berbagai bidang.</p>
+    <ol class="works">
+      <?php foreach (['Sistem Manajemen Toko', 'Sistem Koperasi KSM', 'Klinik Dental Care', 'Program Keuangan Android &amp; Web', 'Program Administrasi Instansi'] as $i => $w): ?>
+      <li><span class="num"><?= $i + 1 ?></span><?= $w ?></li>
+      <?php endforeach; ?>
+    </ol>
+    <a class="btn w" href="kontak?topik=aplikasi#form">Diskusikan aplikasi Anda <?= arrow() ?></a>
   </div>
   <?php if ($shot): ?>
-  <img class="slot-img" src="<?= e($shot) ?>" alt="Tampilan Sistem Manajemen Toko" width="1040" height="660" loading="lazy">
+  <img class="slot-img" src="<?= e($shot) ?>" alt="Tampilan aplikasi buatan AGNIA" width="1040" height="660" loading="lazy">
   <?php else: ?>
   <div class="slot" aria-hidden="true">
     <div class="mock">
